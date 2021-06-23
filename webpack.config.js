@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-mode: 'development',
-entry: {
-   index: './src/index.tsx',
-},
-module: {
+  mode: 'development',
+  entry: {
+    index: './src/index.tsx',
+  },
+  module: {
     rules: [
       {
         test: /\.tsx?$/,
@@ -19,14 +20,14 @@ module: {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-devtool: 'inline-source-map',
-devServer: {
+  devtool: 'inline-source-map',
+  devServer: {
     contentBase: './dist',
     hot: true,
   },
-plugins: [
+  plugins: [
     new HtmlWebpackPlugin({
-     template: './public/index.html'
+      template: './public/index.html',
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
