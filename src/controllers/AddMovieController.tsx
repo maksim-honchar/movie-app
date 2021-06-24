@@ -1,14 +1,21 @@
 import React, {
   ChangeEvent, FC, useState, SyntheticEvent,
 } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
+import { addMovie } from '../redux/moviesSlice';
 import { AddMovieForm } from '../view/AddMovieForm';
+import useHooks from '../utils/hooks';
 
 export const AddMovieController: FC = () => {
+  const { useAppDispatch } = useHooks();
+  const dispatch = useAppDispatch();
+
   const [movieTitle, setMovieTitle] = useState('');
   const [yearRelease, setYearRelease] = useState<number | string>('');
   const [format, setFormat] = useState('');
   const [firstActor, setFirstActor] = useState({ firstName: '', lastName: '' });
   const [secondActor, setSecondActor] = useState({ firstName: '', lastName: '' });
+  const year = +yearRelease;
 
   const handleSetMovie = (e: ChangeEvent<HTMLInputElement>) => setMovieTitle(e.target.value);
   const handleSetRelease = (e: ChangeEvent<{ value: number}>) => setYearRelease(e.target.value);
@@ -26,10 +33,10 @@ export const AddMovieController: FC = () => {
     e.preventDefault();
     const cast = [firstActor, secondActor];
     const film = {
-      movieTitle, yearRelease, format, cast,
+      movieTitle, year, format, cast, id: nanoid(),
     };
 
-    console.log(film);
+    dispatch(addMovie(film));
   };
 
   return (
