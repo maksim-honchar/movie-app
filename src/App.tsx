@@ -1,8 +1,11 @@
 import React from 'react';
+import { Layout } from './view/Layout';
 
 function App() {
   return (
-    <h2>React Webpack</h2>
+    <Layout>
+      <h2>React app</h2>
+    </Layout>
   );
 }
 
