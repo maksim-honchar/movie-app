@@ -1,7 +1,7 @@
 import React, {
   ChangeEvent, FC, useState, SyntheticEvent,
 } from 'react';
-import { nanoid } from '@reduxjs/toolkit';
+import { nanoid, unwrapResult } from '@reduxjs/toolkit';
 import { addMovie } from '../redux/moviesSlice';
 import { AddMovieForm } from '../view/AddMovieForm';
 import useHooks from '../utils/hooks';
@@ -72,7 +72,7 @@ export const AddMovieController: FC = () => {
     { target: { name, value } }:ChangeEvent<HTMLInputElement>,
   ) => setFifthActor({ ...fifthActor, [name]: value });
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     const cast = [
       firstActor, secondActor, thirdActor, fourthActor, fifthActor,
@@ -81,7 +81,22 @@ export const AddMovieController: FC = () => {
     const film = {
       movieTitle, year, format, cast, id: nanoid(),
     };
-    dispatch(addMovie(film));
+
+    try {
+      const resultAction = await dispatch(addMovie(film));
+      unwrapResult(resultAction);
+      setMovieTitle('');
+      setYearRelease('');
+      setFormat('');
+      setFirstActor({ firstName: '', lastName: '' });
+      setSecondActor({ firstName: '', lastName: '' });
+      setThirdActor({ firstName: '', lastName: '' });
+      setFourthActor({ firstName: '', lastName: '' });
+      setFifthActor({ firstName: '', lastName: '' });
+      setActorCounter(0);
+    } catch (error) {
+      console.error('Failed to save the post: ', error);
+    }
   };
 
   const addCount = () => setActorCounter(actorCounter + 1);
