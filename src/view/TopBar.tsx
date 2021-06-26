@@ -105,7 +105,7 @@ export const TopBar: FC<ITopBar> = (props) => {
             </div>
             <form onSubmit={handleSubmit}>
               <InputBase
-                placeholder="Search…"
+                placeholder="title or name..."
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
