@@ -12,7 +12,7 @@ In the project directory, you can run:
 
 ## Application architecture
 
-The application uses the following technology stack: TypeScript, React, Redux, Material-UI, Firebase, react-router-dom.
+The application uses the following technology stack: TypeScript, React, Redux, Material-UI, Firebase, react-router-dom, webpack.
 The src folder contains folders and files responsible for UI and application logic.
 The controllers folder contains components responsible for the application logic.
 The view folder contains components that are responsible for displaying UI.
