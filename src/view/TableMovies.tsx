@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import IconButton from '@material-ui/core/IconButton';
 import { IMovie } from '../utils/types';
+import { ShowActors } from './ShowActors';
 
 const useStyles = makeStyles({
   table: {
@@ -36,15 +37,15 @@ export const TableMovies: FC<ITableMovies> = ({ sortedMovies, deleteFilm }) => {
         <TableHead>
           <TableRow>
             <TableCell>Title</TableCell>
-            <TableCell align="right">Release Year</TableCell>
+            <TableCell align="right">Year</TableCell>
             <TableCell align="right">Format</TableCell>
             <TableCell align="right">Stars</TableCell>
-            <TableCell align="right">Action</TableCell>
+            <TableCell align="right">Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {sortedMovies.map(({
-            movieTitle, year, format, id,
+            movieTitle, year, format, id, cast,
           }) => (
             <TableRow key={id}>
               <TableCell component="th" scope="row">
@@ -52,7 +53,9 @@ export const TableMovies: FC<ITableMovies> = ({ sortedMovies, deleteFilm }) => {
               </TableCell>
               <TableCell align="right">{year}</TableCell>
               <TableCell align="right">{format}</TableCell>
-              <TableCell align="right">...</TableCell>
+              <TableCell align="right">
+                <ShowActors cast={cast} />
+              </TableCell>
               <TableCell align="right">
                 <IconButton
                   className={classes.deliteIcon}
