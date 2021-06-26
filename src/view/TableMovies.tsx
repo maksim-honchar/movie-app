@@ -10,7 +10,6 @@ import Paper from '@material-ui/core/Paper';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import IconButton from '@material-ui/core/IconButton';
 import { IMovie } from '../utils/types';
-import db from '../firebase/firebaseInitial';
 
 const useStyles = makeStyles({
   table: {
@@ -24,11 +23,11 @@ const useStyles = makeStyles({
 });
 
 interface ITableMovies {
-    allMovies: IMovie[]
+    sortedMovies: IMovie[]
     deleteFilm: (id: string) => void
 }
 
-export const TableMovies: FC<ITableMovies> = ({ allMovies, deleteFilm }) => {
+export const TableMovies: FC<ITableMovies> = ({ sortedMovies, deleteFilm }) => {
   const classes = useStyles();
 
   return (
@@ -44,7 +43,7 @@ export const TableMovies: FC<ITableMovies> = ({ allMovies, deleteFilm }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {allMovies.map(({
+          {sortedMovies.map(({
             movieTitle, year, format, id,
           }) => (
             <TableRow key={id}>

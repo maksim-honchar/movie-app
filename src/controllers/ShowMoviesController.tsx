@@ -10,6 +10,8 @@ export const ShowMoviesController: FC = () => {
   const status = useAppSelector((state) => state.movies.status);
   const allMovies = useAppSelector((state) => state.movies.setMovies);
 
+  const sortedMovies = allMovies.slice().sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
+
   const deleteFilm = (id: string) => dispatch(deleteMovie(id));
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export const ShowMoviesController: FC = () => {
 
   return (
     <TableMovies
-      allMovies={allMovies}
+      sortedMovies={sortedMovies}
       deleteFilm={deleteFilm}
     />
   );
