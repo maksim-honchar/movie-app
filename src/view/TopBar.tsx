@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import HomeIcon from '@material-ui/icons/Home';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -87,9 +88,9 @@ export const TopBar: FC<ITopBar> = (props) => {
             edge="start"
             className={classes.menuButton}
             color="inherit"
-            aria-label="open drawer"
+            onClick={toHome}
           >
-            <MenuIcon />
+            <HomeIcon />
           </IconButton>
           <Typography
             className={classes.title}
