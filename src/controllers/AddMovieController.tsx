@@ -2,13 +2,16 @@ import React, {
   ChangeEvent, FC, useState, SyntheticEvent,
 } from 'react';
 import { nanoid, unwrapResult } from '@reduxjs/toolkit';
+import { useHistory } from 'react-router-dom';
 import { addMovie } from '../redux/moviesSlice';
 import { AddMovieForm } from '../view/AddMovieForm';
 import useHooks from '../utils/hooks';
+import { AddMovieList } from '../view/AddMovieList';
 
 export const AddMovieController: FC = () => {
   const { useAppDispatch } = useHooks();
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const [movieTitle, setMovieTitle] = useState('');
   const [yearRelease, setYearRelease] = useState<number | string>('');
@@ -85,6 +88,7 @@ export const AddMovieController: FC = () => {
     try {
       const resultAction = await dispatch(addMovie(film));
       unwrapResult(resultAction);
+      history.push('/');
       setMovieTitle('');
       setYearRelease('');
       setFormat('');
@@ -134,6 +138,7 @@ export const AddMovieController: FC = () => {
         moreThanThree={moreThanThree}
         handleFifthActor={handleFifthActor}
       />
+      <AddMovieList />
     </>
   );
 };

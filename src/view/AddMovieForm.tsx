@@ -107,7 +107,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4" gutterBottom>add movie</Typography>
+      <Typography variant="h4" gutterBottom color="textSecondary">add movie</Typography>
       <form noValidate autoComplete="off">
         <div className={classes.inputDiv}>
           <TextField

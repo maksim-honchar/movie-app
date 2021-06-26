@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    cursor: 'pointer',
   },
   search: {
     position: 'relative',
@@ -68,10 +69,15 @@ interface ITopBar {
   searchQuery: string
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void
   handleSubmit: (e: SyntheticEvent) => void
+  toHome: () => void
 }
 
-export const TopBar: FC<ITopBar> = ({ searchQuery, handleChange, handleSubmit }) => {
+export const TopBar: FC<ITopBar> = (props) => {
   const classes = useStyles();
+
+  const {
+    searchQuery, handleChange, handleSubmit, toHome,
+  } = props;
 
   return (
     <div className={classes.root}>
@@ -85,7 +91,12 @@ export const TopBar: FC<ITopBar> = ({ searchQuery, handleChange, handleSubmit })
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography
+            className={classes.title}
+            variant="h6"
+            noWrap
+            onClick={toHome}
+          >
             Movie-APP
           </Typography>
           <div className={classes.search}>

@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
 } from 'react-router-dom';
 import { SearchPageController } from './controllers/SearchPageController';
 import { ShowMoviesController } from './controllers/ShowMoviesController';

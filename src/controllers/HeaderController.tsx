@@ -15,14 +15,18 @@ export const HeaderController: FC = () => {
     e.preventDefault();
     if (searchQuery) {
       history.push(`/search/${searchQuery}`);
+      setSearchQuery('');
     }
   };
+
+  const toHome = () => history.push('/');
 
   return (
     <TopBar
       searchQuery={searchQuery}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
+      toHome={toHome}
     />
   );
 };
