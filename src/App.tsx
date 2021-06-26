@@ -1,10 +1,11 @@
 import React from 'react';
+import { ShowMoviesController } from './controllers/ShowMoviesController';
 import { Layout } from './view/Layout';
 
 function App() {
   return (
     <Layout>
-      <h2>React app</h2>
+      <ShowMoviesController />
     </Layout>
   );
 }

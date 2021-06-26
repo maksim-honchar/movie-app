@@ -11,6 +11,13 @@ const initialState: InitialState = {
   error: null,
 };
 
+export const getMovies = createAsyncThunk('movies/getMovies', async () => {
+  const allMovies: IMovie[] = [];
+  const response = await db.collection(movies).get();
+  response.forEach((doc) => allMovies.push(doc.data() as IMovie));
+  return allMovies;
+});
+
 export const addMovie = createAsyncThunk('movies/addMovie', async (movie: IMovie) => {
   await db.collection(movies).doc(movie.id).set(movie);
   const response = await db.collection(movies).doc(movie.id).get();
@@ -18,11 +25,31 @@ export const addMovie = createAsyncThunk('movies/addMovie', async (movie: IMovie
   return result;
 });
 
+export const deleteMovie = createAsyncThunk('movies/deleteMovie', async (id: string) => {
+  await db.collection(movies).doc(id).delete();
+  const allMovies: IMovie[] = [];
+  const response = await db.collection(movies).get();
+  response.forEach((doc) => allMovies.push(doc.data() as IMovie));
+  return allMovies;
+});
+
 const moviesSlice = createSlice({
   name: 'movies',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getMovies.pending, (state) => {
+      state.status = loading;
+    });
+    builder.addCase(getMovies.fulfilled, (state, action) => {
+      state.status = succeeded;
+      state.setMovies.push(...action.payload);
+    });
+    builder.addCase(getMovies.rejected, (state, action) => {
+      state.status = failed;
+      state.error = action.error.message;
+    });
+
     builder.addCase(addMovie.pending, (state) => {
       state.status = loading;
     });
@@ -31,6 +58,18 @@ const moviesSlice = createSlice({
       state.setMovies.push(action.payload);
     });
     builder.addCase(addMovie.rejected, (state, action) => {
+      state.status = failed;
+      state.error = action.error.message;
+    });
+
+    builder.addCase(deleteMovie.pending, (state) => {
+      state.status = loading;
+    });
+    builder.addCase(deleteMovie.fulfilled, (state, action) => {
+      state.status = succeeded;
+      state.setMovies = action.payload;
+    });
+    builder.addCase(deleteMovie.rejected, (state, action) => {
       state.status = failed;
       state.error = action.error.message;
     });
