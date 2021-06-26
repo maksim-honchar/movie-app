@@ -22,4 +22,4 @@ Firebase folder is responsible for firebase settings
 
 ## Deploy
 
-[https://contacts-book-zeta.vercel.app/](https://contacts-book-zeta.vercel.app/)
+[https://movie-app-five-olive.vercel.app/](https://movie-app-five-olive.vercel.app/)
