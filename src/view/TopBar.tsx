@@ -7,7 +7,6 @@ import InputBase from '@material-ui/core/InputBase';
 import {
   createStyles, fade, Theme, makeStyles,
 } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 
