@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -22,15 +22,13 @@ interface IShowActors {
 
 export const ShowActors: FC<IShowActors> = ({ cast }) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    setAnchorEl(event.currentTarget);
+  const handlePopoverOpen = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    setAnchorEl(e.currentTarget);
   };
 
-  const handlePopoverClose = () => {
-    setAnchorEl(null);
-  };
+  const handlePopoverClose = () => setAnchorEl(null);
 
   const open = Boolean(anchorEl);
 

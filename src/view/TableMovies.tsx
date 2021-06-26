@@ -44,7 +44,7 @@ export const TableMovies: FC<ITableMovies> = ({ sortedMovies, deleteFilm }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {sortedMovies.map(({
+          {sortedMovies?.map(({
             movieTitle, year, format, id, cast,
           }) => (
             <TableRow key={id}>

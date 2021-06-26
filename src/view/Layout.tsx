@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { TopBar } from './TopBar';
 import { AddMovieController } from '../controllers/AddMovieController';
+import { HeaderController } from '../controllers/HeaderController';
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +22,7 @@ export const Layout: FC = ({ children }) => {
 
   return (
     <>
-      <TopBar />
+      <HeaderController />
       <div className={classes.root}>
         <div className={classes.children}>
           {children}

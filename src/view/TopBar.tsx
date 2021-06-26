@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ChangeEvent, SyntheticEvent } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -64,7 +64,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-export const TopBar: FC = () => {
+interface ITopBar {
+  searchQuery: string
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleSubmit: (e: SyntheticEvent) => void
+}
+
+export const TopBar: FC<ITopBar> = ({ searchQuery, handleChange, handleSubmit }) => {
   const classes = useStyles();
 
   return (
@@ -86,14 +92,18 @@ export const TopBar: FC = () => {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <form onSubmit={handleSubmit}>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+                value={searchQuery}
+                onChange={handleChange}
+              />
+            </form>
           </div>
         </Toolbar>
       </AppBar>

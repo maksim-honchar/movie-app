@@ -24,6 +24,7 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     hot: true,
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -35,5 +36,6 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
+    publicPath: '/',
   },
 };
