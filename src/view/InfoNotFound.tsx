@@ -9,6 +9,9 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     marginTop: '30vh',
   },
+  description: {
+    marginTop: 20,
+  },
 });
 
 export const InfoNotFound = () => {
@@ -27,6 +30,14 @@ export const InfoNotFound = () => {
         Information not found
       </Typography>
       <Divider variant="middle" />
+      <Typography
+        paragraph
+        color="textSecondary"
+        variant="caption"
+        className={classes.description}
+      >
+        make sure to enter the correct actor&#39;s first name or movie title
+      </Typography>
     </div>
   );
 };
