@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
   rightBlock: {
     flex: 3,
-    height: '100vh',
+    minHeight: '100vh',
     borderLeft: '1px solid #e0e0e0',
   },
 });

@@ -20,9 +20,10 @@ const useStyles = makeStyles({
 
 interface IAddMovieList {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+  clearTarget: (event: { currentTarget: { reset: () => void } }) => void
 }
 
-export const AddMovieList: FC<IAddMovieList> = ({ handleChange }) => {
+export const AddMovieList: FC<IAddMovieList> = ({ handleChange, clearTarget }) => {
   const classes = useStyles();
 
   return (
@@ -38,23 +39,24 @@ export const AddMovieList: FC<IAddMovieList> = ({ handleChange }) => {
         ...or upload file
       </Typography>
       <label htmlFor="button-file">
-        <input
-          accept="*"
-          className={classes.input}
-          id="button-file"
-          type="file"
-          onChange={handleChange}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<CloudUploadIcon />}
-          component="span"
-        >
-          Upload
-        </Button>
+        <form onClick={clearTarget} aria-hidden="true">
+          <input
+            accept="*"
+            className={classes.input}
+            id="button-file"
+            type="file"
+            onChange={handleChange}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<CloudUploadIcon />}
+            component="span"
+          >
+            Upload
+          </Button>
+        </form>
       </label>
-
     </div>
   );
 };

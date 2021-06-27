@@ -21,6 +21,7 @@ export const UploadFileController: FC = () => {
     fileReader.onload = (event: any) => {
       setFile(JSON.parse(event.target.result));
     };
+    dispatch(addMovieList(file));
   };
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export const UploadFileController: FC = () => {
           unwrapResult(resultAction);
           history.push('/');
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.error(error);
         }
       }
@@ -39,9 +41,14 @@ export const UploadFileController: FC = () => {
     dispatchFile();
   }, [canDispatch, dispatch, file, history]);
 
+  const clearTarget = (
+    event: { currentTarget: { reset: () => void } },
+  ) => event.currentTarget.reset();
+
   return (
     <AddMovieList
       handleChange={handleChange}
+      clearTarget={clearTarget}
     />
   );
 };
