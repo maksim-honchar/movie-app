@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { IMovie } from '../utils/types';
 import { ShowActors } from './ShowActors';
+import { InfoNotFound } from './InfoNotFound';
 
 const useStyles = makeStyles({
   root: {
@@ -35,10 +36,15 @@ interface ITableMovies {
     sortedMovies: IMovie[]
     deleteFilm: (id: string) => void
     tableIsLoaded: boolean
+    searchIsFailed?: boolean
   }
 
-export const TableMovies: FC<ITableMovies> = ({ sortedMovies, deleteFilm, tableIsLoaded }) => {
+export const TableMovies: FC<ITableMovies> = (props) => {
   const classes = useStyles();
+
+  const {
+    sortedMovies, deleteFilm, tableIsLoaded, searchIsFailed,
+  } = props;
 
   const table = (
     <TableContainer component={Paper}>
@@ -80,11 +86,19 @@ export const TableMovies: FC<ITableMovies> = ({ sortedMovies, deleteFilm, tableI
     </TableContainer>
   );
 
+  let content;
+
+  if (tableIsLoaded) {
+    content = table;
+  } else if (searchIsFailed) {
+    content = <InfoNotFound />;
+  } else {
+    content = <CircularProgress className={classes.spiner} />;
+  }
+
   return (
     <div className={classes.root}>
-      {
-        tableIsLoaded ? table : <CircularProgress className={classes.spiner} />
-      }
+      {content}
     </div>
   );
 };

@@ -28,14 +28,17 @@ export const SearchPageController: FC<RouteComponentProps<MatchParams>> = ({ mat
       .find(({ firstName }) => firstName.toLowerCase() === query.toLowerCase()));
 
   let sortedMovies;
+  const searchByTitleLength = searchByTitle.length > 0;
+  const searchByActorLength = searchByActor.length > 0;
 
-  if (searchByTitle.length > 0) {
+  if (searchByTitleLength) {
     sortedMovies = searchByTitle;
-  } else if (searchByActor.length > 0) {
+  } else if (searchByActorLength) {
     sortedMovies = searchByActor;
   }
 
-  const tableIsLoaded = sortedMovies.length > 0;
+  const tableIsLoaded = sortedMovies?.length > 0 && sortedMovies !== undefined;
+  const searchIsFailed = sortedMovies === undefined;
 
   const deleteFilm = (id: string) => dispatch(deleteMovie(id));
 
@@ -45,6 +48,7 @@ export const SearchPageController: FC<RouteComponentProps<MatchParams>> = ({ mat
         sortedMovies={sortedMovies}
         deleteFilm={deleteFilm}
         tableIsLoaded={tableIsLoaded}
+        searchIsFailed={searchIsFailed}
       />
     </>
   );
