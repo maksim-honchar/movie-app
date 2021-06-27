@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 import { addMovie } from '../redux/moviesSlice';
 import { AddMovieForm } from '../view/AddMovieForm';
 import useHooks from '../utils/hooks';
-import { AddMovieList } from '../view/AddMovieList';
 
 export const AddMovieController: FC = () => {
   const { useAppDispatch } = useHooks();
@@ -99,46 +98,44 @@ export const AddMovieController: FC = () => {
       setFifthActor({ firstName: '', lastName: '' });
       setActorCounter(0);
     } catch (error) {
-      console.error('Failed to save the post: ', error);
+      // eslint-disable-next-line no-console
+      console.error('Failed to save: ', error);
     }
   };
 
   const addCount = () => setActorCounter(actorCounter + 1);
 
   return (
-    <>
-      <AddMovieForm
-        movieTitle={movieTitle}
-        handleSetMovie={handleSetMovie}
-        yearRelease={yearRelease}
-        handleSetRelease={handleSetRelease}
-        format={format}
-        handleSetFormat={handleSetFormat}
-        firstActor={firstActor}
-        handleFirstActor={handleFirstActor}
-        secondActor={secondActor}
-        handleSecondActor={handleSecondActor}
-        thirdActor={thirdActor}
-        handleThirdActor={handleThirdActor}
-        handleSubmit={handleSubmit}
-        canSubmit={canSubmit}
-        addCount={addCount}
-        moreThanZero={moreThanZero}
-        counterEqualOne={counterEqualOne}
-        secondActorFilled={secondActorFilled}
-        moreThanOne={moreThanOne}
-        counterEqualTwo={counterEqualTwo}
-        thirdActorFilled={thirdActorFilled}
-        fourthActor={fourthActor}
-        handleFourthActor={handleFourthActor}
-        moreThanTwo={moreThanTwo}
-        counterEqualThree={counterEqualThree}
-        fourthActorFilled={fourthActorFilled}
-        fifthActor={fifthActor}
-        moreThanThree={moreThanThree}
-        handleFifthActor={handleFifthActor}
-      />
-      <AddMovieList />
-    </>
+    <AddMovieForm
+      movieTitle={movieTitle}
+      handleSetMovie={handleSetMovie}
+      yearRelease={yearRelease}
+      handleSetRelease={handleSetRelease}
+      format={format}
+      handleSetFormat={handleSetFormat}
+      firstActor={firstActor}
+      handleFirstActor={handleFirstActor}
+      secondActor={secondActor}
+      handleSecondActor={handleSecondActor}
+      thirdActor={thirdActor}
+      handleThirdActor={handleThirdActor}
+      handleSubmit={handleSubmit}
+      canSubmit={canSubmit}
+      addCount={addCount}
+      moreThanZero={moreThanZero}
+      counterEqualOne={counterEqualOne}
+      secondActorFilled={secondActorFilled}
+      moreThanOne={moreThanOne}
+      counterEqualTwo={counterEqualTwo}
+      thirdActorFilled={thirdActorFilled}
+      fourthActor={fourthActor}
+      handleFourthActor={handleFourthActor}
+      moreThanTwo={moreThanTwo}
+      counterEqualThree={counterEqualThree}
+      fourthActorFilled={fourthActorFilled}
+      fifthActor={fifthActor}
+      moreThanThree={moreThanThree}
+      handleFifthActor={handleFifthActor}
+    />
   );
 };

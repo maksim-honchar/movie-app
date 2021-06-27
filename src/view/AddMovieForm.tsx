@@ -14,7 +14,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const useStyles = makeStyles({
   root: {
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: 20,
   },
   inputDiv: {
     margin: '15px auto',
@@ -107,7 +107,13 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4" gutterBottom color="textSecondary">add movie</Typography>
+      <Typography
+        variant="h5"
+        gutterBottom
+        color="textSecondary"
+      >
+        fill the form
+      </Typography>
       <form noValidate autoComplete="off">
         <div className={classes.inputDiv}>
           <TextField

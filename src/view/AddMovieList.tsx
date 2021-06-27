@@ -1,46 +1,56 @@
 import React, { FC, ChangeEvent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import db from '../firebase/firebaseInitial';
-import { movies } from '../utils/constants';
-import testJson from '../utils/test.json';
+import Divider from '@material-ui/core/Divider';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    marginTop: 50,
+    marginTop: 30,
     textAlign: 'center',
+  },
+  title: {
+    marginTop: 10,
   },
   input: {
     display: 'none',
   },
 });
 
-export const AddMovieList: FC = () => {
+interface IAddMovieList {
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+export const AddMovieList: FC<IAddMovieList> = ({ handleChange }) => {
   const classes = useStyles();
-
-  let fileList;
-
-  const uploadPhoto = (e: ChangeEvent<HTMLInputElement>) => {
-    fileList = e.currentTarget.files;
-    if (!fileList) return;
-
-    if (fileList) {
-      console.log(fileList);
-    }
-  };
 
   return (
     <div className={classes.root}>
-      <input
-        accept="*"
-        className={classes.input}
-        id="contained-button-file"
-        multiple
-        type="file"
-        onChange={uploadPhoto}
-      />
-      <label htmlFor="contained-button-file">
-        <Button variant="contained" color="primary" component="span">
+      <Divider />
+      <Typography
+        className={classes.title}
+        variant="h5"
+        gutterBottom
+        color="textSecondary"
+        paragraph
+      >
+        ...or upload file
+      </Typography>
+      <label htmlFor="button-file">
+        <input
+          accept="*"
+          className={classes.input}
+          id="button-file"
+          type="file"
+          onChange={handleChange}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<CloudUploadIcon />}
+          component="span"
+        >
           Upload
         </Button>
       </label>
@@ -48,7 +58,3 @@ export const AddMovieList: FC = () => {
     </div>
   );
 };
-
-//   const uploadFile = () => {
-//     testJson.map((movie) => db.collection(movies).doc(movie.id).set(movie));
-//   };

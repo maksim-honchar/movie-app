@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { AddMovieController } from '../controllers/AddMovieController';
 import { HeaderController } from '../controllers/HeaderController';
+import { UploadFileController } from '../controllers/UploadFileController';
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +30,7 @@ export const Layout: FC = ({ children }) => {
         </div>
         <div className={classes.rightBlock}>
           <AddMovieController />
+          <UploadFileController />
         </div>
       </div>
     </>
