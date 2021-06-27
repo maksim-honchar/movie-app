@@ -13,6 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { IMovie } from '../utils/types';
 import { ShowActors } from './ShowActors';
 import { InfoNotFound } from './InfoNotFound';
+import { EmptyStorage } from './EmptyStorage';
 
 const useStyles = makeStyles({
   root: {
@@ -37,13 +38,14 @@ interface ITableMovies {
     deleteFilm: (id: string) => void
     tableIsLoaded: boolean
     searchIsFailed?: boolean
+    emptySorage?: boolean
   }
 
 export const TableMovies: FC<ITableMovies> = (props) => {
   const classes = useStyles();
 
   const {
-    sortedMovies, deleteFilm, tableIsLoaded, searchIsFailed,
+    sortedMovies, deleteFilm, tableIsLoaded, searchIsFailed, emptySorage,
   } = props;
 
   const table = (
@@ -88,7 +90,9 @@ export const TableMovies: FC<ITableMovies> = (props) => {
 
   let content;
 
-  if (tableIsLoaded) {
+  if (emptySorage) {
+    content = <EmptyStorage />;
+  } else if (tableIsLoaded) {
     content = table;
   } else if (searchIsFailed) {
     content = <InfoNotFound />;
