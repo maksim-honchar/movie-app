@@ -26,16 +26,25 @@ const useStyles = makeStyles({
     margin: '15px auto',
     display: 'flex',
     width: 300,
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
   },
   inputFieldActor: {
-    width: 140,
+    width: 120,
   },
   plusButton: {
     margin: '-10px 0 5px 0',
   },
   btnSubmit: {
     width: 300,
+  },
+  castWrapper: {
+    border: '1px solid #e0e0e0',
+    borderRadius: 5,
+    width: 300,
+    margin: '1px auto 15px auto',
+  },
+  titleCast: {
+    marginTop: 15,
   },
 });
 
@@ -150,27 +159,35 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
             <MenuItem value="Blu-Ray">Blu-Ray</MenuItem>
           </Select>
         </FormControl>
-        <div className={classes.inputDivActor}>
-          <TextField
-            label="first name"
-            variant="outlined"
-            className={classes.inputFieldActor}
-            name="firstName"
-            value={firstActor.firstName}
-            onChange={handleFirstActor}
-            required
-          />
-          <TextField
-            label="last name"
-            variant="outlined"
-            className={classes.inputFieldActor}
-            name="lastName"
-            value={firstActor.lastName}
-            onChange={handleFirstActor}
-            required
-          />
-        </div>
-        {
+        <Typography
+          color="textSecondary"
+          className={classes.titleCast}
+        >
+          cast
+        </Typography>
+        <div className={classes.castWrapper}>
+
+          <div className={classes.inputDivActor}>
+            <TextField
+              label="first name"
+              variant="outlined"
+              className={classes.inputFieldActor}
+              name="firstName"
+              value={firstActor.firstName}
+              onChange={handleFirstActor}
+              required
+            />
+            <TextField
+              label="last name"
+              variant="outlined"
+              className={classes.inputFieldActor}
+              name="lastName"
+              value={firstActor.lastName}
+              onChange={handleFirstActor}
+              required
+            />
+          </div>
+          {
         !moreThanZero
         && (
         <div className={classes.plusButton}>
@@ -184,7 +201,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
         </div>
         )
         }
-        {
+          {
           moreThanZero
           && (
           <div className={classes.inputDivActor}>
@@ -207,7 +224,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
           </div>
           )
         }
-        {
+          {
         counterEqualOne
         && (
         <div>
@@ -221,7 +238,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
         </div>
         )
         }
-        {
+          {
           moreThanOne
           && (
           <div className={classes.inputDivActor}>
@@ -244,7 +261,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
           </div>
           )
         }
-        {
+          {
         counterEqualTwo
         && (
         <div>
@@ -258,7 +275,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
         </div>
         )
         }
-        {
+          {
           moreThanTwo
           && (
           <div className={classes.inputDivActor}>
@@ -281,7 +298,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
           </div>
           )
         }
-        {
+          {
         counterEqualThree
         && (
         <div>
@@ -295,7 +312,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
         </div>
         )
         }
-        {
+          {
           moreThanThree
           && (
           <div className={classes.inputDivActor}>
@@ -318,6 +335,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
           </div>
           )
         }
+        </div>
         <Button
           variant="contained"
           color="primary"

@@ -14,7 +14,6 @@ export const ShowMoviesController: FC = () => {
 
   const tableIsLoaded = sortedMovies.length > 0;
   const emptySorage = status === 'succeeded' && allMovies.length === 0;
-  console.log(emptySorage);
 
   const deleteFilm = (id: string) => dispatch(deleteMovie(id));
 

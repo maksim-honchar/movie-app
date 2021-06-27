@@ -21,7 +21,7 @@ export const EmptyStorage = () => {
         color="textSecondary"
         gutterBottom
       >
-        Please add content ...
+        Please add content
       </Typography>
       <Typography variant="overline">
         fill the form or upload file
