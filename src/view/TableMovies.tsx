@@ -9,10 +9,15 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import IconButton from '@material-ui/core/IconButton';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { IMovie } from '../utils/types';
 import { ShowActors } from './ShowActors';
 
 const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   table: {
     minWidth: 650,
   },
@@ -21,17 +26,21 @@ const useStyles = makeStyles({
       background: '#fbe9e7',
     },
   },
+  spiner: {
+    marginTop: '20vh',
+  },
 });
 
 interface ITableMovies {
     sortedMovies: IMovie[]
     deleteFilm: (id: string) => void
-}
+    tableIsLoaded: boolean
+  }
 
-export const TableMovies: FC<ITableMovies> = ({ sortedMovies, deleteFilm }) => {
+export const TableMovies: FC<ITableMovies> = ({ sortedMovies, deleteFilm, tableIsLoaded }) => {
   const classes = useStyles();
 
-  return (
+  const table = (
     <TableContainer component={Paper}>
       <Table className={classes.table}>
         <TableHead>
@@ -69,5 +78,13 @@ export const TableMovies: FC<ITableMovies> = ({ sortedMovies, deleteFilm }) => {
         </TableBody>
       </Table>
     </TableContainer>
+  );
+
+  return (
+    <div className={classes.root}>
+      {
+        tableIsLoaded ? table : <CircularProgress className={classes.spiner} />
+      }
+    </div>
   );
 };

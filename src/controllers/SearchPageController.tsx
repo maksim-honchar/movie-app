@@ -35,6 +35,8 @@ export const SearchPageController: FC<RouteComponentProps<MatchParams>> = ({ mat
     sortedMovies = searchByActor;
   }
 
+  const tableIsLoaded = sortedMovies.length > 0;
+
   const deleteFilm = (id: string) => dispatch(deleteMovie(id));
 
   return (
@@ -42,6 +44,7 @@ export const SearchPageController: FC<RouteComponentProps<MatchParams>> = ({ mat
       <TableMovies
         sortedMovies={sortedMovies}
         deleteFilm={deleteFilm}
+        tableIsLoaded={tableIsLoaded}
       />
     </>
   );

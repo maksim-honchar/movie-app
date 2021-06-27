@@ -12,6 +12,8 @@ export const ShowMoviesController: FC = () => {
 
   const sortedMovies = allMovies.slice().sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
 
+  const tableIsLoaded = sortedMovies.length > 0;
+
   const deleteFilm = (id: string) => dispatch(deleteMovie(id));
 
   useEffect(() => {
@@ -24,6 +26,7 @@ export const ShowMoviesController: FC = () => {
     <TableMovies
       sortedMovies={sortedMovies}
       deleteFilm={deleteFilm}
+      tableIsLoaded={tableIsLoaded}
     />
   );
 };
