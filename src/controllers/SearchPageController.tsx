@@ -10,6 +10,7 @@ interface MatchParams {
 
 export const SearchPageController: FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   const { query } = match.params;
+  const lowercaseQuery = query.toLowerCase();
 
   const { useAppSelector, useAppDispatch } = useHooks();
   const dispatch = useAppDispatch();
@@ -19,13 +20,13 @@ export const SearchPageController: FC<RouteComponentProps<MatchParams>> = ({ mat
   const searchByTitle = allMovies
     .slice()
     .sort((a, b) => a.movieTitle.localeCompare(b.movieTitle))
-    .filter(({ movieTitle }) => movieTitle.toLowerCase() === query.toLowerCase());
+    .filter(({ movieTitle }) => movieTitle.toLowerCase().includes(lowercaseQuery));
 
   const searchByActor = allMovies
     .slice()
     .sort((a, b) => a.movieTitle.localeCompare(b.movieTitle))
     .filter(({ cast }) => cast
-      .find(({ firstName }) => firstName.toLowerCase() === query.toLowerCase()));
+      .find(({ firstName }) => firstName.toLowerCase().includes(lowercaseQuery)));
 
   let sortedMovies;
   const searchByTitleLength = searchByTitle.length > 0;

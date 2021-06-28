@@ -13,7 +13,6 @@ export const HeaderController = () => {
     e.preventDefault();
     if (searchQuery) {
       history.push(`/search/${searchQuery}`);
-      setSearchQuery('');
     }
   };
 
