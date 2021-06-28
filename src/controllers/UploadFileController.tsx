@@ -18,7 +18,7 @@ export const UploadFileController = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const fileReader = new FileReader();
     fileReader.readAsText(e.target.files[0], 'UTF-8');
-    fileReader.onload = (event: any) => {
+    fileReader.onload = (event: ProgressEvent<FileReader> & { target: { result: string } }) => {
       setFile(JSON.parse(event.target.result));
     };
     dispatch(addMovieList(file));
