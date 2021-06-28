@@ -44,7 +44,7 @@ export const AddMovieList: FC<IAddMovieList> = ({ handleChange, clearTarget, err
         <label htmlFor="button-file">
           <form onClick={clearTarget} aria-hidden="true">
             <input
-              accept="*"
+              accept=".txt, .json"
               className={classes.input}
               id="button-file"
               type="file"
