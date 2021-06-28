@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import { ErrorMessage } from './ErrorMessage';
 
 const useStyles = makeStyles({
   root: {
@@ -10,11 +11,15 @@ const useStyles = makeStyles({
     marginTop: '20vh',
   },
   titleIntro: {
-    marginTop: 70,
+    marginTop: 50,
   },
 });
 
-export const EmptyStorage = () => {
+interface IEmptyStorage {
+  errorMessage: string
+}
+
+export const EmptyStorage:FC<IEmptyStorage> = ({ errorMessage }) => {
   const classes = useStyles();
 
   return (
@@ -30,6 +35,7 @@ export const EmptyStorage = () => {
         fill the form or upload file
       </Typography>
       <Divider variant="middle" />
+      <ErrorMessage errorMessage={errorMessage} />
       <Typography
         variant="h6"
         color="textSecondary"

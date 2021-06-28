@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
+    height: 20,
     marginTop: 10,
   },
 });
@@ -21,11 +22,14 @@ export const ErrorMessage:FC<IErrorMessage> = ({ errorMessage }) => {
       paragraph
       align="center"
       variant="caption"
-      className={classes.root}
     >
       {`An error occured: ${errorMessage}`}
     </Typography>
   );
 
-  return errorMessage && content;
+  return (
+    <div className={classes.root}>
+      {errorMessage && content}
+    </div>
+  );
 };

@@ -39,13 +39,14 @@ interface ITableMovies {
     tableIsLoaded: boolean
     searchIsFailed?: boolean
     emptySorage?: boolean
+    errorMessage?: string
   }
 
 export const TableMovies: FC<ITableMovies> = (props) => {
   const classes = useStyles();
 
   const {
-    sortedMovies, deleteFilm, tableIsLoaded, searchIsFailed, emptySorage,
+    sortedMovies, deleteFilm, tableIsLoaded, searchIsFailed, emptySorage, errorMessage,
   } = props;
 
   const table = (
@@ -91,7 +92,7 @@ export const TableMovies: FC<ITableMovies> = (props) => {
   let content;
 
   if (emptySorage) {
-    content = <EmptyStorage />;
+    content = <EmptyStorage errorMessage={errorMessage} />;
   } else if (tableIsLoaded) {
     content = table;
   } else if (searchIsFailed) {

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { unwrapResult } from '@reduxjs/toolkit';
+import React, { useEffect, useState } from 'react';
 import { deleteMovie, getMovies } from '../redux/moviesSlice';
 import useHooks from '../utils/hooks';
 import { TableMovies } from '../view/TableMovies';
@@ -6,6 +7,8 @@ import { TableMovies } from '../view/TableMovies';
 export const ShowMoviesController = () => {
   const { useAppDispatch, useAppSelector } = useHooks();
   const dispatch = useAppDispatch();
+
+  const [errorMessage, setErrorMessage] = useState('');
 
   const status = useAppSelector((state) => state.movies.status);
   const allMovies = useAppSelector((state) => state.movies.setMovies);
@@ -18,8 +21,18 @@ export const ShowMoviesController = () => {
   const deleteFilm = (id: string) => dispatch(deleteMovie(id));
 
   useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        setErrorMessage('');
+        const resultAction = await dispatch(getMovies());
+        unwrapResult(resultAction);
+      } catch (error) {
+        setErrorMessage(error);
+      }
+    };
+
     if (status === 'idle') {
-      dispatch(getMovies());
+      fetchMovies();
     }
   }, [dispatch, status]);
 
@@ -29,6 +42,7 @@ export const ShowMoviesController = () => {
       deleteFilm={deleteFilm}
       tableIsLoaded={tableIsLoaded}
       emptySorage={emptySorage}
+      errorMessage={errorMessage}
     />
   );
 };
