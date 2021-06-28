@@ -26,19 +26,19 @@ export const UploadFileController = () => {
 
   useEffect(() => {
     const dispatchFile = async () => {
-      if (canDispatch) {
-        try {
-          setErrorMessage('');
-          const resultAction = await dispatch(addMovieList(file));
-          unwrapResult(resultAction);
-          history.push('/');
-        } catch (error) {
-          setErrorMessage(error);
-        }
+      try {
+        setErrorMessage('');
+        const resultAction = await dispatch(addMovieList(file));
+        unwrapResult(resultAction);
+        history.push('/');
+      } catch (error) {
+        setErrorMessage(error);
       }
     };
 
-    dispatchFile();
+    if (canDispatch) {
+      dispatchFile();
+    }
   }, [canDispatch, dispatch, file, history]);
 
   const clearTarget = (
