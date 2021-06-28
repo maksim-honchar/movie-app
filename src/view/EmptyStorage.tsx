@@ -62,7 +62,7 @@ export const EmptyStorage:FC<IEmptyStorage> = ({ errorMessage }) => {
         Firebase folder is responsible for firebase settings
         <br />
         For the sake of ease of use of this application,
-        I am not using a separate .env file transfer with passwords.
+        I am not using private transfer of the .env file with passwords.
       </Typography>
     </div>
   );

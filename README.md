@@ -19,7 +19,7 @@ In the project directory, you can run:
 - The redux folder contains a store and a reducer
 - The utils folder, as the name implies, contains constants, interfaces, a custom hook,
 - Firebase folder is responsible for firebase settings
-- For the sake of ease of use of this application, I am not using a separate .env file transfer with passwords.
+- For the sake of ease of use of this application, I am not using private transfer of the .env file with passwords.
 
 ## Deploy
 
