@@ -21,7 +21,6 @@ export const UploadFileController = () => {
     fileReader.onload = (event: ProgressEvent<FileReader> & { target: { result: string } }) => {
       setFile(JSON.parse(event.target.result));
     };
-    dispatch(addMovieList(file));
   };
 
   useEffect(() => {
