@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Typography from '@material-ui/core/Typography';
+import { ErrorMessage } from './ErrorMessage';
 
 const useStyles = makeStyles({
   root: {
@@ -21,42 +22,46 @@ const useStyles = makeStyles({
 interface IAddMovieList {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void
   clearTarget: (event: { currentTarget: { reset: () => void } }) => void
-}
+  errorMessage: string
+  }
 
-export const AddMovieList: FC<IAddMovieList> = ({ handleChange, clearTarget }) => {
+export const AddMovieList: FC<IAddMovieList> = ({ handleChange, clearTarget, errorMessage }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Divider />
-      <Typography
-        className={classes.title}
-        variant="h5"
-        gutterBottom
-        color="textSecondary"
-        paragraph
-      >
-        ...or upload file
-      </Typography>
-      <label htmlFor="button-file">
-        <form onClick={clearTarget} aria-hidden="true">
-          <input
-            accept="*"
-            className={classes.input}
-            id="button-file"
-            type="file"
-            onChange={handleChange}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<CloudUploadIcon />}
-            component="span"
-          >
-            Upload
-          </Button>
-        </form>
-      </label>
-    </div>
+    <>
+      <div className={classes.root}>
+        <Divider />
+        <Typography
+          className={classes.title}
+          variant="h5"
+          gutterBottom
+          color="textSecondary"
+          paragraph
+        >
+          ...or upload file
+        </Typography>
+        <label htmlFor="button-file">
+          <form onClick={clearTarget} aria-hidden="true">
+            <input
+              accept="*"
+              className={classes.input}
+              id="button-file"
+              type="file"
+              onChange={handleChange}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<CloudUploadIcon />}
+              component="span"
+            >
+              Upload
+            </Button>
+          </form>
+        </label>
+      </div>
+      <ErrorMessage errorMessage={errorMessage} />
+    </>
   );
 };

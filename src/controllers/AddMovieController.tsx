@@ -19,6 +19,7 @@ export const AddMovieController = () => {
   const [fourthActor, setFourthActor] = useState({ firstName: '', lastName: '' });
   const [fifthActor, setFifthActor] = useState({ firstName: '', lastName: '' });
   const [actorCounter, setActorCounter] = useState(0);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const year = +yearRelease;
 
@@ -83,6 +84,7 @@ export const AddMovieController = () => {
     };
 
     try {
+      setErrorMessage('');
       const resultAction = await dispatch(addMovie(film));
       unwrapResult(resultAction);
       history.push('/');
@@ -96,8 +98,7 @@ export const AddMovieController = () => {
       setFifthActor({ firstName: '', lastName: '' });
       setActorCounter(0);
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to save: ', error);
+      setErrorMessage(error);
     }
   };
 
@@ -134,6 +135,7 @@ export const AddMovieController = () => {
       fifthActor={fifthActor}
       moreThanThree={moreThanThree}
       handleFifthActor={handleFifthActor}
+      errorMessage={errorMessage}
     />
   );
 };

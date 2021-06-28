@@ -11,6 +11,8 @@ export const UploadFileController = () => {
   const history = useHistory();
 
   const [file, setFile] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const canDispatch = file.length > 0;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,12 +28,12 @@ export const UploadFileController = () => {
     const dispatchFile = async () => {
       if (canDispatch) {
         try {
+          setErrorMessage('');
           const resultAction = await dispatch(addMovieList(file));
           unwrapResult(resultAction);
           history.push('/');
         } catch (error) {
-          // eslint-disable-next-line no-console
-          console.error(error);
+          setErrorMessage(error);
         }
       }
     };
@@ -47,6 +49,7 @@ export const UploadFileController = () => {
     <AddMovieList
       handleChange={handleChange}
       clearTarget={clearTarget}
+      errorMessage={errorMessage}
     />
   );
 };

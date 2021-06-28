@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
+import { ErrorMessage } from './ErrorMessage';
 
 const useStyles = makeStyles({
   root: {
@@ -78,6 +79,7 @@ interface IAddMovieForm {
     counterEqualThree: boolean
     fourthActorFilled: boolean
     moreThanThree: boolean
+    errorMessage: string
 }
 
 export const AddMovieForm: FC<IAddMovieForm> = (props) => {
@@ -112,82 +114,84 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
     counterEqualThree,
     fourthActorFilled,
     moreThanThree,
+    errorMessage,
   } = props;
 
   return (
-    <div className={classes.root}>
-      <Typography
-        variant="h5"
-        gutterBottom
-        color="textSecondary"
-      >
-        fill the form
-      </Typography>
-      <form noValidate autoComplete="off">
-        <div className={classes.inputDiv}>
-          <TextField
-            label="title"
-            variant="outlined"
-            className={classes.inputField}
-            value={movieTitle}
-            onChange={handleSetMovie}
-            required
-          />
-        </div>
-        <div className={classes.inputDiv}>
-          <TextField
-            label="year"
-            variant="outlined"
-            className={classes.inputField}
-            value={yearRelease}
-            onChange={handleSetRelease}
-            type="number"
-            required
-          />
-        </div>
-        <FormControl variant="outlined">
-          <InputLabel required>format</InputLabel>
-          <Select
-            className={classes.inputField}
-            value={format}
-            onChange={handleSetFormat}
-            label="format"
-            required
-          >
-            <MenuItem value="VHS">VHS</MenuItem>
-            <MenuItem value="DVD">DVD</MenuItem>
-            <MenuItem value="Blu-Ray">Blu-Ray</MenuItem>
-          </Select>
-        </FormControl>
+    <>
+      <div className={classes.root}>
         <Typography
+          variant="h5"
+          gutterBottom
           color="textSecondary"
-          className={classes.titleCast}
         >
-          cast
+          fill the form
         </Typography>
-        <div className={classes.castWrapper}>
-
-          <div className={classes.inputDivActor}>
+        <form noValidate autoComplete="off">
+          <div className={classes.inputDiv}>
             <TextField
-              label="first name"
+              label="title"
               variant="outlined"
-              className={classes.inputFieldActor}
-              name="firstName"
-              value={firstActor.firstName}
-              onChange={handleFirstActor}
-              required
-            />
-            <TextField
-              label="last name"
-              variant="outlined"
-              className={classes.inputFieldActor}
-              name="lastName"
-              value={firstActor.lastName}
-              onChange={handleFirstActor}
+              className={classes.inputField}
+              value={movieTitle}
+              onChange={handleSetMovie}
               required
             />
           </div>
-          {
+          <div className={classes.inputDiv}>
+            <TextField
+              label="year"
+              variant="outlined"
+              className={classes.inputField}
+              value={yearRelease}
+              onChange={handleSetRelease}
+              type="number"
+              required
+            />
+          </div>
+          <FormControl variant="outlined">
+            <InputLabel required>format</InputLabel>
+            <Select
+              className={classes.inputField}
+              value={format}
+              onChange={handleSetFormat}
+              label="format"
+              required
+            >
+              <MenuItem value="VHS">VHS</MenuItem>
+              <MenuItem value="DVD">DVD</MenuItem>
+              <MenuItem value="Blu-Ray">Blu-Ray</MenuItem>
+            </Select>
+          </FormControl>
+          <Typography
+            color="textSecondary"
+            className={classes.titleCast}
+          >
+            cast
+          </Typography>
+          <div className={classes.castWrapper}>
+
+            <div className={classes.inputDivActor}>
+              <TextField
+                label="first name"
+                variant="outlined"
+                className={classes.inputFieldActor}
+                name="firstName"
+                value={firstActor.firstName}
+                onChange={handleFirstActor}
+                required
+              />
+              <TextField
+                label="last name"
+                variant="outlined"
+                className={classes.inputFieldActor}
+                name="lastName"
+                value={firstActor.lastName}
+                onChange={handleFirstActor}
+                required
+              />
+            </div>
+            {
         !moreThanZero
         && (
         <div className={classes.plusButton}>
@@ -201,7 +205,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
         </div>
         )
         }
-          {
+            {
           moreThanZero
           && (
           <div className={classes.inputDivActor}>
@@ -224,7 +228,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
           </div>
           )
         }
-          {
+            {
         counterEqualOne
         && (
         <div>
@@ -238,7 +242,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
         </div>
         )
         }
-          {
+            {
           moreThanOne
           && (
           <div className={classes.inputDivActor}>
@@ -261,7 +265,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
           </div>
           )
         }
-          {
+            {
         counterEqualTwo
         && (
         <div>
@@ -275,7 +279,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
         </div>
         )
         }
-          {
+            {
           moreThanTwo
           && (
           <div className={classes.inputDivActor}>
@@ -298,7 +302,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
           </div>
           )
         }
-          {
+            {
         counterEqualThree
         && (
         <div>
@@ -312,7 +316,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
         </div>
         )
         }
-          {
+            {
           moreThanThree
           && (
           <div className={classes.inputDivActor}>
@@ -335,18 +339,20 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
           </div>
           )
         }
-        </div>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          className={classes.btnSubmit}
-          onClick={handleSubmit}
-          disabled={!canSubmit}
-        >
-          Submit
-        </Button>
-      </form>
-    </div>
+          </div>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            className={classes.btnSubmit}
+            onClick={handleSubmit}
+            disabled={!canSubmit}
+          >
+            Submit
+          </Button>
+        </form>
+      </div>
+      <ErrorMessage errorMessage={errorMessage} />
+    </>
   );
 };
