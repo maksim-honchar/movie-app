@@ -1,13 +1,11 @@
-import React, {
-  ChangeEvent, FC, useState, SyntheticEvent,
-} from 'react';
+import React, { ChangeEvent, useState, SyntheticEvent } from 'react';
 import { nanoid, unwrapResult } from '@reduxjs/toolkit';
 import { useHistory } from 'react-router-dom';
 import { addMovie } from '../redux/moviesSlice';
 import { AddMovieForm } from '../view/AddMovieForm';
 import useHooks from '../utils/hooks';
 
-export const AddMovieController: FC = () => {
+export const AddMovieController = () => {
   const { useAppDispatch } = useHooks();
   const dispatch = useAppDispatch();
   const history = useHistory();

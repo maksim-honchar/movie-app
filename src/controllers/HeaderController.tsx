@@ -1,10 +1,8 @@
-import React, {
-  FC, useState, ChangeEvent, SyntheticEvent,
-} from 'react';
+import React, { useState, ChangeEvent, SyntheticEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { TopBar } from '../view/TopBar';
 
-export const HeaderController: FC = () => {
+export const HeaderController = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const history = useHistory();

@@ -1,13 +1,11 @@
-import React, {
-  ChangeEvent, FC, useEffect, useState,
-} from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useHistory } from 'react-router-dom';
 import { addMovieList } from '../redux/moviesSlice';
 import useHooks from '../utils/hooks';
 import { AddMovieList } from '../view/AddMovieList';
 
-export const UploadFileController: FC = () => {
+export const UploadFileController = () => {
   const { useAppDispatch } = useHooks();
   const dispatch = useAppDispatch();
   const history = useHistory();

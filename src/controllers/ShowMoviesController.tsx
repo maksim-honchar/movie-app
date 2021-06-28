@@ -1,9 +1,9 @@
-import React, { FC, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { deleteMovie, getMovies } from '../redux/moviesSlice';
 import useHooks from '../utils/hooks';
 import { TableMovies } from '../view/TableMovies';
 
-export const ShowMoviesController: FC = () => {
+export const ShowMoviesController = () => {
   const { useAppDispatch, useAppSelector } = useHooks();
   const dispatch = useAppDispatch();
 
