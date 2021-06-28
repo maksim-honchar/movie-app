@@ -34,7 +34,7 @@ export const deleteMovie = createAsyncThunk('movies/deleteMovie', async (id: str
 });
 
 export const addMovieList = createAsyncThunk('movies/addMovieList', async (list: IMovie[]) => {
-  list.map((movie) => db.collection(movies).doc(movie.id).set(movie));
+  list.forEach((movie) => db.collection(movies).doc(movie.id).set(movie));
   const allMovies: IMovie[] = [];
   const response = await db.collection(movies).get();
   response.forEach((doc) => allMovies.push(doc.data() as IMovie));
