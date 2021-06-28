@@ -52,7 +52,7 @@ export const EmptyStorage:FC<IEmptyStorage> = ({ errorMessage }) => {
           TypeScript, React, Redux, Material-UI, Firebase, react-router-dom, webpack.
           <br />
           The file folder contains two files.
-          This is sample_movie.txt for uploading files to the firewall server
+          This is sample_movie.txt for uploading files to the firebase server
           and readme.pdf which explains the architecture of the application.
           <br />
           The src folder contains folders and files responsible for UI and application logic.

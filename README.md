@@ -13,6 +13,7 @@ In the project directory, you can run:
 ## Application architecture
 
 - The application uses the following technology stack: TypeScript, React, Redux, Material-UI, Firebase, react-router-dom, webpack.
+- The file folder contains two files. This is sample_movie.txt for uploading files to the firebase server and readme.pdf which explains the architecture of the application.
 - The src folder contains folders and files responsible for UI and application logic.
 - The controllers folder contains components responsible for the application logic.
 - The view folder contains components that are responsible for displaying UI.
