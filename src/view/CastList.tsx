@@ -3,11 +3,11 @@ import { nanoid } from '@reduxjs/toolkit';
 import { Typography } from '@material-ui/core';
 
 interface ICastList {
-    cast: { firstName: '', lastName: '' }[]
+  actorStack: { firstName: '', lastName: '' }[]
 }
 
-export const CastList: FC<ICastList> = ({ cast }) => {
-  const content = cast.map(({ firstName, lastName }) => (
+export const CastList: FC<ICastList> = ({ actorStack }) => {
+  const content = actorStack.map(({ firstName, lastName }) => (
     <Typography key={nanoid()}>
       {`${firstName} ${lastName}`}
     </Typography>

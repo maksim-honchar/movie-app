@@ -11,47 +11,77 @@ export const AddMovieController = () => {
   const history = useHistory();
 
   const [movieTitle, setMovieTitle] = useState('');
+  const [titleError, setTitleError] = useState(false);
   const [yearRelease, setYearRelease] = useState<number | string>('');
+  const [yearError, setYearError] = useState(false);
   const [format, setFormat] = useState('');
+  const [formatError, setFormatError] = useState(false);
   const [actor, setActor] = useState({ firstName: '', lastName: '' });
-  const [cast, setCast] = useState([]);
+  const [actorError, setActorError] = useState(false);
+  const [actorStack, setActorStack] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
   const year = +yearRelease;
   const yearLength = yearRelease.toString().length > 3;
-  const castLength = cast.length > 0;
-  const canSave = [movieTitle, yearLength, format, castLength].every(Boolean);
+  const actorStackLength = actorStack.length > 0;
+  const isActorFilled = (actor.firstName && actor.lastName) || actorStackLength;
 
-  const handleSetMovie = (e: ChangeEvent<HTMLInputElement>) => setMovieTitle(e.target.value);
-  const handleSetRelease = (e: ChangeEvent<{ value: number}>) => setYearRelease(e.target.value);
-  const handleSetFormat = (e: ChangeEvent<HTMLInputElement>) => setFormat(e.target.value);
+  const canSave = [movieTitle, yearLength, format, actorStackLength].every(Boolean);
+
+  const handleSetMovie = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitleError(false);
+    setMovieTitle(e.target.value);
+  };
+  const handleSetRelease = (e: ChangeEvent<{ value: number}>) => {
+    setYearError(false);
+    setYearRelease(e.target.value);
+  };
+  const handleSetFormat = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormatError(false);
+    setFormat(e.target.value);
+  };
 
   const handleChangeActor = (
     { target: { name, value } }:ChangeEvent<HTMLInputElement>,
-  ) => setActor({ ...actor, [name]: value });
+  ) => {
+    setActorError(false);
+    setActor({ ...actor, [name]: value });
+  };
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    const film = {
-      movieTitle, year, format, cast, id: nanoid(),
-    };
-    try {
-      setErrorMessage('');
-      const resultAction = await dispatch(addMovie(film));
-      unwrapResult(resultAction);
-      history.push('/');
-      setMovieTitle('');
-      setYearRelease('');
-      setFormat('');
-      setActor({ firstName: '', lastName: '' });
-      setCast([]);
-    } catch (error) {
-      setErrorMessage(error);
+
+    if (!movieTitle) {
+      setTitleError(true);
+    } else if (!yearLength) {
+      setYearError(true);
+    } else if (!format) {
+      setFormatError(true);
+    } else if (!isActorFilled) {
+      setActorError(true);
+    } else {
+      const cast = actorStackLength ? actorStack : [actor];
+      const film = {
+        movieTitle, year, format, cast, id: nanoid(),
+      };
+      try {
+        setErrorMessage('');
+        const resultAction = await dispatch(addMovie(film));
+        unwrapResult(resultAction);
+        history.push('/');
+        setMovieTitle('');
+        setYearRelease('');
+        setFormat('');
+        setActor({ firstName: '', lastName: '' });
+        setActorStack([]);
+      } catch (error) {
+        setErrorMessage(error);
+      }
     }
   };
 
   const addActor = () => {
-    setCast([...cast, actor]);
+    setActorStack([...actorStack, actor]);
     setActor({ firstName: '', lastName: '' });
   };
 
@@ -68,8 +98,12 @@ export const AddMovieController = () => {
       handleSubmit={handleSubmit}
       addActor={addActor}
       errorMessage={errorMessage}
-      cast={cast}
+      actorStack={actorStack}
       canSave={canSave}
+      titleError={titleError}
+      yearError={yearError}
+      formatError={formatError}
+      actorError={actorError}
     />
   );
 };

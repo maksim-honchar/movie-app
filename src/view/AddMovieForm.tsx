@@ -62,8 +62,12 @@ interface IAddMovieForm {
     handleSubmit: (e: SyntheticEvent) => void
     addActor: () => void
     errorMessage?: string
-    cast: { firstName: '', lastName: '' }[]
+    actorStack: { firstName: '', lastName: '' }[]
     canSave: boolean
+    titleError: boolean
+    yearError: boolean
+    formatError: boolean
+    actorError: boolean
 }
 
 export const AddMovieForm: FC<IAddMovieForm> = (props) => {
@@ -80,8 +84,12 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
     handleSubmit,
     addActor,
     errorMessage,
-    cast,
+    actorStack,
     canSave,
+    titleError,
+    yearError,
+    formatError,
+    actorError,
   } = props;
 
   return (
@@ -103,6 +111,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
               value={movieTitle}
               onChange={handleSetMovie}
               required
+              error={titleError}
             />
           </div>
           <div className={classes.inputDiv}>
@@ -114,6 +123,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
               onChange={handleSetRelease}
               type="number"
               required
+              error={yearError}
             />
           </div>
           <FormControl variant="outlined">
@@ -124,6 +134,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
               onChange={handleSetFormat}
               label="format"
               required
+              error={formatError}
             >
               <MenuItem value="VHS">VHS</MenuItem>
               <MenuItem value="DVD">DVD</MenuItem>
@@ -146,6 +157,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
                 value={actor.firstName}
                 onChange={handleChangeActor}
                 required
+                error={actorError}
               />
               <TextField
                 label="last name"
@@ -155,10 +167,11 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
                 value={actor.lastName}
                 onChange={handleChangeActor}
                 required
+                error={actorError}
               />
             </div>
             <div>
-              <CastList cast={cast} />
+              <CastList actorStack={actorStack} />
             </div>
             <div className={classes.plusButton}>
               <Tooltip title="Add actor" placement="right">
@@ -176,7 +189,7 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
             type="submit"
             className={classes.btnSubmit}
             onClick={handleSubmit}
-            disabled={!canSave}
+            // disabled={!canSave}
           >
             Submit
           </Button>
