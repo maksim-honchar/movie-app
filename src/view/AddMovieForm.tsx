@@ -63,7 +63,6 @@ interface IAddMovieForm {
     addActor: () => void
     errorMessage?: string
     actorStack: { firstName: '', lastName: '' }[]
-    canSave: boolean
     titleError: boolean
     yearError: boolean
     formatError: boolean
@@ -85,7 +84,6 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
     addActor,
     errorMessage,
     actorStack,
-    canSave,
     titleError,
     yearError,
     formatError,
@@ -189,7 +187,6 @@ export const AddMovieForm: FC<IAddMovieForm> = (props) => {
             type="submit"
             className={classes.btnSubmit}
             onClick={handleSubmit}
-            // disabled={!canSave}
           >
             Submit
           </Button>

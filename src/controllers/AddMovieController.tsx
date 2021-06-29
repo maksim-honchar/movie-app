@@ -26,8 +26,6 @@ export const AddMovieController = () => {
   const actorStackLength = actorStack.length > 0;
   const isActorFilled = (actor.firstName && actor.lastName) || actorStackLength;
 
-  const canSave = [movieTitle, yearLength, format, actorStackLength].every(Boolean);
-
   const handleSetMovie = (e: ChangeEvent<HTMLInputElement>) => {
     setTitleError(false);
     setMovieTitle(e.target.value);
@@ -99,7 +97,6 @@ export const AddMovieController = () => {
       addActor={addActor}
       errorMessage={errorMessage}
       actorStack={actorStack}
-      canSave={canSave}
       titleError={titleError}
       yearError={yearError}
       formatError={formatError}
